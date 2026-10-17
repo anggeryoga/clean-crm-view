@@ -75,79 +75,12 @@ function Card({ className, children }: { className?: string; children: React.Rea
 }
 
 function Dashboard() {
-  const [ai, setAi] = useState(true);
-  const [open, setOpen] = useState(false);
   const [range, setRange] = useState("30 days");
 
   return (
-    <div className="flex min-h-screen gap-4 bg-background p-4 font-sans text-foreground antialiased">
-      {/* Sidebar */}
-      <aside className={cn("z-40 h-[calc(100vh-2rem)] w-60 shrink-0 flex-col rounded-3xl bg-sidebar p-3 md:sticky md:top-4 md:flex", open ? "fixed left-4 top-4 flex shadow-2xl" : "hidden")}>
-        <div className="flex items-center justify-between px-1 py-1">
-          <div className="flex items-center gap-2.5">
-            <div className="grid h-9 w-9 place-items-center rounded-full bg-primary text-accent"><Home className="h-4 w-4" /></div>
-            <span className="text-lg font-semibold tracking-tight">LeaseFlow</span>
-          </div>
-          <button onClick={() => setOpen(false)} className="grid h-8 w-8 place-items-center rounded-full bg-secondary"><Menu className="h-4 w-4" /></button>
-        </div>
-
-        <button className="mt-4 flex items-center gap-3 rounded-2xl bg-secondary p-2.5 text-left">
-          <div className="grid h-9 w-9 place-items-center rounded-xl bg-card"><Building2 className="h-4 w-4" /></div>
-          <div className="min-w-0 flex-1">
-            <div className="text-sm font-semibold">Harborline</div>
-            <div className="text-xs text-muted-foreground">6 properties</div>
-          </div>
-          <ChevronDown className="h-4 w-4 text-muted-foreground" />
-        </button>
-
-        <nav className="mt-4 flex-1 overflow-y-auto">
-          <a className="flex items-center gap-3 rounded-2xl bg-primary px-3 py-2.5 text-sm font-medium text-primary-foreground" href="/">
-            <LayoutGrid className="h-4 w-4" /> Dashboard
-          </a>
-          {nav.map((g) => (
-            <div key={g.group} className="mt-5">
-              <div className="px-3 pb-1.5 text-xs text-muted-foreground">{g.group}</div>
-              {g.items.map((it) => (
-                <button key={it.label} className="flex w-full items-center gap-3 rounded-2xl px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary">
-                  <it.icon className="h-4 w-4 text-muted-foreground" />
-                  <span className="flex-1 text-left">{it.label}</span>
-                  {it.count && <span className="text-xs text-muted-foreground">{it.count}</span>}
-                </button>
-              ))}
-            </div>
-          ))}
-        </nav>
-
-        <div className="rounded-2xl bg-accent p-3 text-accent-foreground">
-          <div className="flex items-center gap-2.5">
-            <div className="grid h-8 w-8 place-items-center rounded-full bg-primary text-accent"><Sparkles className="h-4 w-4" /></div>
-            <div className="flex-1">
-              <div className="text-sm font-semibold">LeaseFlow AI</div>
-              <div className="text-xs opacity-70">{ai ? "On" : "Off"} · 38 chats</div>
-            </div>
-            <button onClick={() => setAi(!ai)} className={cn("relative h-6 w-11 rounded-full transition-colors", ai ? "bg-primary" : "bg-muted-foreground/40")} aria-label="Toggle AI">
-              <span className={cn("absolute top-1 h-4 w-4 rounded-full bg-card transition-all", ai ? "left-6" : "left-1")} />
-            </button>
-          </div>
-          <button className="mt-3 flex w-full items-center justify-between rounded-xl bg-card px-3 py-2 text-xs font-medium">
-            4 need your review <ChevronRight className="h-3.5 w-3.5" />
-          </button>
-        </div>
-
-        <div className="mt-3 flex items-center gap-3 rounded-2xl bg-secondary p-2.5">
-          <div className="grid h-9 w-9 place-items-center rounded-full bg-card text-xs font-semibold">JE</div>
-          <div className="flex-1">
-            <div className="text-sm font-semibold">Jordan Ellis</div>
-            <div className="text-xs text-muted-foreground">Leasing Manager</div>
-          </div>
-          <MoreHorizontal className="h-4 w-4 text-muted-foreground" />
-        </div>
-      </aside>
-
-      {/* Main */}
+      <main className="min-w-0 flex-1 space-y-4">
       <main className="min-w-0 flex-1 space-y-4">
         <header className="flex flex-wrap items-center gap-3">
-          <button onClick={() => setOpen(true)} className="grid h-11 w-11 place-items-center rounded-full bg-card md:hidden" aria-label="Menu"><Menu className="h-4 w-4" /></button>
           <h1 className="mr-auto text-3xl font-semibold tracking-tight">Good morning, Jordan</h1>
           <label className="flex h-11 w-56 items-center gap-2 rounded-full bg-card px-4 text-sm text-muted-foreground">
             <Search className="h-4 w-4" />
@@ -308,6 +241,5 @@ function Dashboard() {
           </div>
         </div>
       </main>
-    </div>
   );
 }
