@@ -76,18 +76,19 @@ function Card({ className, children }: { className?: string; children: React.Rea
 
 function Dashboard() {
   const [ai, setAi] = useState(true);
+  const [open, setOpen] = useState(false);
   const [range, setRange] = useState("30 days");
 
   return (
     <div className="flex min-h-screen gap-4 bg-background p-4 font-sans text-foreground antialiased">
       {/* Sidebar */}
-      <aside className="sticky top-4 hidden h-[calc(100vh-2rem)] w-64 shrink-0 flex-col rounded-3xl bg-sidebar p-3 lg:flex">
+      <aside className={cn("z-40 h-[calc(100vh-2rem)] w-60 shrink-0 flex-col rounded-3xl bg-sidebar p-3 md:sticky md:top-4 md:flex", open ? "fixed left-4 top-4 flex shadow-2xl" : "hidden")}>
         <div className="flex items-center justify-between px-1 py-1">
           <div className="flex items-center gap-2.5">
             <div className="grid h-9 w-9 place-items-center rounded-full bg-primary text-accent"><Home className="h-4 w-4" /></div>
             <span className="text-lg font-semibold tracking-tight">LeaseFlow</span>
           </div>
-          <button className="grid h-8 w-8 place-items-center rounded-full bg-secondary"><Menu className="h-4 w-4" /></button>
+          <button onClick={() => setOpen(false)} className="grid h-8 w-8 place-items-center rounded-full bg-secondary"><Menu className="h-4 w-4" /></button>
         </div>
 
         <button className="mt-4 flex items-center gap-3 rounded-2xl bg-secondary p-2.5 text-left">
@@ -146,6 +147,7 @@ function Dashboard() {
       {/* Main */}
       <main className="min-w-0 flex-1 space-y-4">
         <header className="flex flex-wrap items-center gap-3">
+          <button onClick={() => setOpen(true)} className="grid h-11 w-11 place-items-center rounded-full bg-card md:hidden" aria-label="Menu"><Menu className="h-4 w-4" /></button>
           <h1 className="mr-auto text-3xl font-semibold tracking-tight">Good morning, Jordan</h1>
           <label className="flex h-11 w-56 items-center gap-2 rounded-full bg-card px-4 text-sm text-muted-foreground">
             <Search className="h-4 w-4" />
